@@ -3,8 +3,7 @@
 A sleek, premium, and responsive developer portfolio website designed to showcase personal projects, technical skills, and experience. Built with a modern aesthetic featuring smooth transitions, unified layouts, and dark mode support.
 
 ## 🚀 Live Demo
-You can view the live site here: [Live Link](https://streak-forge-33fu.vercel.app/) *(or update with your domain)*
-
+You can view the live site here: https://hariprasad-dev.vercel.app
 ---
 
 ## ✨ Key Features
@@ -39,41 +38,6 @@ You can view the live site here: [Live Link](https://streak-forge-33fu.vercel.ap
 
 ---
 
-## ⚙️ Setup & Installation
-
-### 1. Clone the repository
-```bash
-git clone https://github.com/Hariprasad-1809/portfolio.git
-cd portfolio
-```
-
-### 2. Install dependencies
-```bash
-npm install
-```
-
-### 3. Environment Variables configuration
-Create a `.env` file in the root directory of the project and add your EmailJS credentials:
-```env
-VITE_EMAILJS_SERVICE_ID=your_emailjs_service_id
-VITE_EMAILJS_TEMPLATE_ID=your_emailjs_template_id
-VITE_EMAILJS_PUBLIC_KEY=your_emailjs_public_key
-```
-
-### 4. Run local development server
-```bash
-npm run dev
-```
-The application will be running locally at `http://localhost:5173`.
-
-### 5. Production build
-To build the application for production, compile the static files using Vite:
-```bash
-npm run build
-```
-This generates the optimized static bundles under the `dist/` directory.
-
----
 
 ## 📂 Project Showcase
 
@@ -86,5 +50,4 @@ The portfolio currently showcases these active projects:
 
 ---
 
-## 📄 License
-This project is open-source and available under the [MIT License](LICENSE).
+
