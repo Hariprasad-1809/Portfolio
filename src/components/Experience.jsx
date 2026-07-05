@@ -1,6 +1,21 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 
+const educationData = [
+  {
+    institution: 'Sri Sairam Engineering College',
+    degree: 'Bachelor of Engineering (B.E.)',
+    department: 'Computer Science and Engineering (Cyber Security)',
+    period: '2024 – 2028',
+    points: [
+      'Currently pursuing a Bachelor\'s degree in Computer Science and Engineering with a specialization in Cyber Security.',
+      'Building strong foundations in Data Structures & Algorithms, Database Management Systems, Operating Systems, Computer Networks, and Software Engineering.',
+      'Developing scalable full-stack web applications using React, FastAPI, Python, JavaScript, and SQL.',
+      'Passionate about building AI agent-based and modern web applications, with a strong curiosity to explore emerging technologies and create impactful real-world software solutions.'
+    ]
+  }
+];
+
 const experiences = [
   {
     role: 'Web Development Intern',
@@ -20,7 +35,7 @@ const experiences = [
     points: [
       'Developed a fully functional e-commerce website as part of a team project.',
       'Designed and implemented responsive UI components using HTML, CSS, JavaScript, and React.',
-      'Focused on frontend development including layout design, user interaction, and performance.',
+      'Focus on frontend development including layout design, user interaction, and performance.',
       'Collaborated with team members to integrate frontend with backend systems.'
     ]
   }
@@ -57,19 +72,80 @@ const Experience = () => {
   return (
     <section id="experience" className="section-padding bg-primary/5">
       <div className="max-w-6xl mx-auto">
-        <div className="text-center mb-14 md:mb-16">
+        
+        {/* Education Section */}
+        <div className="text-center mb-10 md:mb-12">
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             className="text-[2rem] md:text-[3rem] font-extrabold mb-4 text-black dark:text-white"
           >
-            My <span className="text-primary">Journey</span>
+            Education
           </motion.h2>
           <div className="w-20 h-1.5 bg-gradient-to-r from-primary to-secondary mx-auto rounded-full" />
         </div>
 
-        <div className="mx-auto max-w-4xl space-y-8 md:space-y-10">
+        <div className="mx-auto max-w-4xl space-y-8 md:space-y-10 mb-20">
+          {educationData.map((edu, index) => (
+            <motion.article
+              key={`${edu.degree}-${edu.institution}`}
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: index * 0.08 }}
+              whileHover={{ y: -6 }}
+              className="group rounded-3xl border border-black/6 dark:border-white/10 bg-white/80 dark:bg-white/5 backdrop-blur-sm shadow-[0_18px_50px_rgba(0,0,0,0.08)] dark:shadow-[0_18px_50px_rgba(0,0,0,0.28)] p-6 md:p-8 lg:p-9 transition-all duration-300 hover:shadow-[0_26px_70px_rgba(0,0,0,0.12)] dark:hover:shadow-[0_26px_70px_rgba(0,0,0,0.38)]"
+            >
+              <div className="flex flex-col gap-2 md:flex-row md:items-start md:justify-between">
+                <div>
+                  <p className="text-sm uppercase tracking-[0.22em] text-gray-900 dark:text-gray-300 mb-2 font-mono">
+                    01
+                  </p>
+                  <h3 className="text-2xl md:text-3xl font-bold tracking-tight text-black dark:text-white">
+                    {edu.degree}
+                  </h3>
+                  <p className="mt-1 text-sm font-semibold text-primary">
+                    {edu.department}
+                  </p>
+                  <p className="mt-2 text-base md:text-lg font-medium text-gray-900 dark:text-gray-300">
+                    {edu.institution}
+                  </p>
+                </div>
+
+                <span className="inline-flex w-fit items-center rounded-full px-3 py-1 text-sm text-gray-900 dark:text-gray-300 bg-black/5 dark:bg-white/10">
+                  {edu.period}
+                </span>
+              </div>
+
+              <div className="thin-divider my-5 md:my-6" />
+
+              <ul className="space-y-3">
+                {edu.points.map((point) => (
+                  <li key={point} className="flex gap-3 text-sm md:text-base leading-relaxed text-gray-900 dark:text-gray-300">
+                    <span className="text-primary mt-1.5 shrink-0">•</span>
+                    <span>{point}</span>
+                  </li>
+                ))}
+              </ul>
+            </motion.article>
+          ))}
+        </div>
+
+        {/* Experience Section */}
+        <div className="text-center mb-10 md:mb-12">
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-[2rem] md:text-[3rem] font-extrabold mb-4 text-black dark:text-white"
+          >
+            My Experience
+          </motion.h2>
+          <div className="w-20 h-1.5 bg-gradient-to-r from-primary to-secondary mx-auto rounded-full" />
+        </div>
+
+        <div className="mx-auto max-w-4xl space-y-8 md:space-y-10 mb-20">
           {experiences.map((exp, index) => (
             <motion.article
               key={`${exp.role}-${exp.company}`}
@@ -82,8 +158,8 @@ const Experience = () => {
             >
               <div className="flex flex-col gap-2 md:flex-row md:items-start md:justify-between">
                 <div>
-                  <p className="text-sm uppercase tracking-[0.22em] text-gray-900 dark:text-gray-300 mb-2">
-                    {String(index + 1).padStart(2, '0')}
+                  <p className="text-sm uppercase tracking-[0.22em] text-gray-900 dark:text-gray-300 mb-2 font-mono">
+                    {String(index + 2).padStart(2, '0')}
                   </p>
                   <h3 className="text-2xl md:text-3xl font-bold tracking-tight text-black dark:text-white">
                     {exp.role}
@@ -112,6 +188,7 @@ const Experience = () => {
           ))}
         </div>
 
+        {/* Volunteer Experience Section */}
         <div className="mx-auto max-w-4xl mt-12 md:mt-14">
           <div className="text-center mb-8 md:mb-10">
             <h3 className="text-[1.75rem] md:text-[2.25rem] font-extrabold mb-3 text-black dark:text-white">Volunteer <span className="text-primary">Experience</span></h3>
@@ -131,7 +208,7 @@ const Experience = () => {
               >
                 <div className="flex flex-col gap-2 md:flex-row md:items-start md:justify-between">
                   <div>
-                    <p className="text-sm uppercase tracking-[0.22em] text-gray-900 dark:text-gray-300 mb-2">
+                    <p className="text-sm uppercase tracking-[0.22em] text-gray-900 dark:text-gray-300 mb-2 font-mono">
                       {String(index + 1).padStart(2, '0')}
                     </p>
                     <h4 className="text-2xl md:text-3xl font-bold tracking-tight text-black dark:text-white">
@@ -161,6 +238,7 @@ const Experience = () => {
             ))}
           </div>
         </div>
+
       </div>
     </section>
   );
