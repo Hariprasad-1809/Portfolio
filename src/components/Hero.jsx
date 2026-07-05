@@ -13,16 +13,14 @@ const Hero = () => {
       <div className="max-w-7xl w-full px-5 sm:px-8 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-[3fr_2fr] items-center gap-10 lg:gap-16">
           <div className="max-w-2xl lg:max-w-none justify-self-center lg:justify-self-start text-center lg:text-left overflow-hidden">
-            <h1 className="font-body uppercase text-4xl sm:text-5xl md:text-7xl lg:text-[5.5rem] xl:text-[6.5rem] sm:whitespace-nowrap leading-none tracking-wide text-charcoal dark:text-offwhite">
+            <h1 className="font-body uppercase text-4xl sm:text-5xl md:text-6xl lg:text-[5rem] xl:text-[6rem] sm:whitespace-nowrap leading-none tracking-wide text-charcoal dark:text-offwhite">
               {largeText}
             </h1>
             {/* Summary directly under the name */}
-            <div className="mt-6">
-              <p className="text-base lg:text-lg leading-relaxed text-gray-900 dark:text-gray-300 max-w-2xl mx-auto lg:mx-0">
-                Product-focused Frontend Developer with hands-on experience in building scalable full-stack applications using React, FastAPI, and MySQL. Proficient in Python and Java, with a strong foundation in backend development, problem-solving, and data-driven applications. Skilled in developing responsive and user-centric interfaces, designing RESTful APIs, and implementing secure authentication systems. Experienced in working within Linux environments, managing development workflows, and deploying modern web applications. Passionate about crafting intuitive user experiences and writing clean, maintainable, and efficient code, with a strong drive to build impactful real-world solutions while continuously learning modern technologies.
-              </p>
+            <div className="mt-8">
+              <p className="text-base lg:text-lg leading-relaxed text-gray-900 dark:text-gray-300 max-w-2xl mx-auto lg:mx-0">Product-focused Frontend Developer with hands-on experience in building scalable full-stack applications using React, FastAPI, and MySQL. Proficient in Python and Java, with a strong foundation in backend development, problem-solving, and data-driven applications. Skilled in developing responsive and user-centric interfaces, designing RESTful APIs, and implementing secure authentication systems. Experienced in working within Linux environments, managing development workflows, and deploying modern web applications. Passionate about crafting intuitive user experiences and writing clean, maintainable, and efficient code, with a strong drive to build impactful real-world solutions while continuously learning modern technologies.</p>
 
-              <div className="mt-6 flex flex-wrap items-center justify-center lg:justify-start gap-3">
+              <div className="mt-8 flex flex-wrap items-center justify-center lg:justify-start gap-3">
                 <Link to="/projects" className="inline-block">
                   <button className="btn-primary min-h-[44px] px-6">View Projects</button>
                 </Link>
