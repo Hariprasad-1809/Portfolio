@@ -1,0 +1,76 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Space+Mono:wght@400;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root{
+  --bg: #F5F5F7;
+  --charcoal: #121212;
+  --accent: #E63946;
+  --muted: #9CA3AF;
+}
+
+@layer base {
+  html { scroll-behavior: smooth; }
+  html.light { background: var(--bg); color: var(--charcoal); }
+  html.dark { background: var(--charcoal); color: var(--bg); }
+
+  body {
+    @apply transition-colors duration-300 text-gray-900 dark:text-gray-300;
+    font-family: 'Space Mono', monospace;
+  }
+
+  h1,h2,h3,h4,h5,h6{ 
+    font-family: 'Playfair Display', serif;
+    @apply text-black dark:text-white;
+  }
+  p, li, a, span { font-family: 'Space Mono', monospace; }
+}
+
+/* Layout tokens for this minimalist design */
+@layer components {
+  .section-padding { @apply pt-[85px] pb-20 px-6 md:px-12 lg:px-24 relative; }
+
+  /* Subtle frosted pill nav for bottom center */
+  .bottom-pill {
+    @apply fixed left-1/2 -translate-x-1/2 bottom-6 z-50 rounded-full px-4 py-2 flex items-center gap-3 backdrop-blur backdrop-saturate-150;
+    background: rgba(245,245,247,0.55);
+    border: 1px solid rgba(18,18,18,0.06);
+  }
+
+  /* Accent CTA used sparingly */
+  .btn-primary {
+    background: var(--accent);
+    color: white;
+    padding: .45rem 1rem;
+    border-radius: 999px;
+    font-weight: 700;
+    letter-spacing: .04em;
+    transition: transform .22s ease, opacity .22s ease;
+  }
+
+  .btn-primary:hover { transform: translateY(-3px); opacity: .95 }
+
+  /* Minimal, borderless cards */
+  .card-min {
+    @apply rounded-2xl overflow-hidden transition-transform duration-300;
+    background: transparent;
+    border: none;
+  }
+
+  /* Subtle divider used for rhythm */
+  .thin-divider { height:1px; background:rgba(0,0,0,0.06); width:100%; }
+}
+
+/* Selection */
+::selection{ background:var(--accent); color: #fff }
+
+/* Scrollbar minimal */
+::-webkit-scrollbar{ width:8px }
+::-webkit-scrollbar-thumb{ background: rgba(0,0,0,0.12); border-radius:999px }
+
+/* Small grain overlay for tactile texture */
+.grain:after{
+  content:''; position:absolute; inset:0; pointer-events:none; opacity:0.03; background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160' viewBox='0 0 160 160'><rect width='160' height='160' fill='none'/><circle cx='2' cy='2' r='0.5' fill='%23000' fill-opacity='0.08'/></svg>");
+}
