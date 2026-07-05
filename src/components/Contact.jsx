@@ -87,7 +87,7 @@ const Contact = () => {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-4xl md:text-5xl font-extrabold mb-4 text-black dark:text-white"
+            className="text-[2rem] md:text-[3rem] font-extrabold mb-4 text-black dark:text-white"
           >
             Get In <span className="text-primary">Touch</span>
           </motion.h2>

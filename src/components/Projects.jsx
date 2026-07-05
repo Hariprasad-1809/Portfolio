@@ -32,7 +32,7 @@ const Projects = () => {
     <section id="projects" className="section-padding">
       <div className="max-w-7xl mx-auto">
         <div className="text-left mb-12">
-          <motion.h2 className="text-4xl md:text-5xl font-heading font-bold mb-2 text-black dark:text-white">Projects</motion.h2>
+          <motion.h2 className="text-[2rem] md:text-[3rem] font-heading font-bold mb-2 text-black dark:text-white">Projects</motion.h2>
           <div className="thin-divider" />
         </div>
 

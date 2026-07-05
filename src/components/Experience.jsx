@@ -62,7 +62,7 @@ const Experience = () => {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-4xl md:text-5xl font-extrabold mb-4 text-black dark:text-white"
+            className="text-[2rem] md:text-[3rem] font-extrabold mb-4 text-black dark:text-white"
           >
             My <span className="text-primary">Journey</span>
           </motion.h2>
@@ -114,7 +114,7 @@ const Experience = () => {
 
         <div className="mx-auto max-w-4xl mt-12 md:mt-14">
           <div className="text-center mb-8 md:mb-10">
-            <h3 className="text-3xl md:text-4xl font-extrabold mb-3 text-black dark:text-white">Volunteer <span className="text-primary">Experience</span></h3>
+            <h3 className="text-[1.75rem] md:text-[2.25rem] font-extrabold mb-3 text-black dark:text-white">Volunteer <span className="text-primary">Experience</span></h3>
             <div className="w-20 h-1.5 bg-gradient-to-r from-primary to-secondary mx-auto rounded-full" />
           </div>
 

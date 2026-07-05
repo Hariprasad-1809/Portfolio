@@ -9,7 +9,7 @@ const Skills = () => {
     <section id="skills" className="section-padding bg-white dark:bg-neutral-950 text-gray-900 dark:text-white">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-14">
-          <h2 className="text-4xl md:text-5xl font-semibold text-black dark:text-white">
+          <h2 className="text-[2rem] md:text-[3rem] font-semibold text-black dark:text-white">
             Technical Skills
           </h2>
           <p className="mt-3 text-sm md:text-base text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
