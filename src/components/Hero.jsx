@@ -9,7 +9,7 @@ const Hero = () => {
 
   // simple, clear presentation: monospace uppercase name and larger, clear photo
   return (
-    <section id="home" className="min-h-screen flex items-center justify-center overflow-hidden relative pt-28 pb-16 lg:py-20">
+    <section id="home" className="flex items-center justify-center overflow-hidden relative pt-28 pb-0 lg:pt-36">
       <div className="max-w-7xl w-full px-5 sm:px-8 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-[3fr_2fr] items-center gap-10 lg:gap-16">
           <div className="max-w-2xl lg:max-w-none justify-self-center lg:justify-self-start text-center lg:text-left overflow-hidden">
@@ -36,7 +36,7 @@ const Hero = () => {
               src="/profile.jpeg"
               alt="Profile"
               onError={(e) => { e.currentTarget.src = '/profile-sample.svg'; }}
-              className="w-64 h-64 sm:w-80 sm:h-80 md:w-[380px] md:h-[380px] max-w-full rounded-2xl object-cover border border-black/6 bg-white shadow-[0_30px_90px_rgba(0,0,0,0.14)] dark:shadow-[0_30px_90px_rgba(0,0,0,0.35)]"
+              className="w-64 h-64 sm:w-80 sm:h-80 md:w-[380px] md:h-[380px] max-w-full rounded-2xl object-cover border border-black/6 bg-white shadow-md"
               style={{ objectPosition: '50% 18%' }}
             />
           </div>

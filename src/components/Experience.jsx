@@ -70,7 +70,7 @@ const volunteerExperiences = [
 
 const Experience = () => {
   return (
-    <section id="experience" className="section-padding bg-primary/5">
+    <section id="experience" className="pt-16 sm:pt-20 pb-16 px-5 sm:pb-20 sm:px-8 md:pb-20 md:px-8 lg:pb-24 lg:px-12 xl:px-24 bg-primary/5 relative">
       <div className="max-w-6xl mx-auto">
         
         {/* Education Section */}
@@ -95,7 +95,7 @@ const Experience = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: index * 0.08 }}
               whileHover={{ y: -6 }}
-              className="group rounded-3xl border border-black/6 dark:border-white/10 bg-white/80 dark:bg-white/5 backdrop-blur-sm shadow-[0_18px_50px_rgba(0,0,0,0.08)] dark:shadow-[0_18px_50px_rgba(0,0,0,0.28)] p-6 md:p-8 lg:p-9 transition-all duration-300 hover:shadow-[0_26px_70px_rgba(0,0,0,0.12)] dark:hover:shadow-[0_26px_70px_rgba(0,0,0,0.38)]"
+              className="group rounded-3xl border border-black/6 dark:border-white/10 bg-white/80 dark:bg-white/5 p-6 md:p-8 lg:p-9 transition-all duration-300"
             >
               <div className="flex flex-col gap-2 md:flex-row md:items-start md:justify-between">
                 <div>
@@ -154,12 +154,12 @@ const Experience = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: index * 0.08 }}
               whileHover={{ y: -6 }}
-              className="group rounded-3xl border border-black/6 dark:border-white/10 bg-white/80 dark:bg-white/5 backdrop-blur-sm shadow-[0_18px_50px_rgba(0,0,0,0.08)] dark:shadow-[0_18px_50px_rgba(0,0,0,0.28)] p-6 md:p-8 lg:p-9 transition-all duration-300 hover:shadow-[0_26px_70px_rgba(0,0,0,0.12)] dark:hover:shadow-[0_26px_70px_rgba(0,0,0,0.38)]"
+              className="group rounded-3xl border border-black/6 dark:border-white/10 bg-white/80 dark:bg-white/5 p-6 md:p-8 lg:p-9 transition-all duration-300"
             >
               <div className="flex flex-col gap-2 md:flex-row md:items-start md:justify-between">
                 <div>
                   <p className="text-sm uppercase tracking-[0.22em] text-gray-900 dark:text-gray-300 mb-2 font-mono">
-                    {String(index + 2).padStart(2, '0')}
+                    {String(index + 1).padStart(2, '0')}
                   </p>
                   <h3 className="text-2xl md:text-3xl font-bold tracking-tight text-black dark:text-white">
                     {exp.role}
@@ -190,7 +190,7 @@ const Experience = () => {
 
         {/* Volunteer Experience Section */}
         <div className="mx-auto max-w-4xl mt-12 md:mt-14">
-          <div className="text-center mb-8 md:mb-10">
+          <div className="text-center mb-10 md:mb-12">
             <h3 className="text-[1.75rem] md:text-[2.25rem] font-extrabold mb-3 text-black dark:text-white">Volunteer <span className="text-primary">Experience</span></h3>
             <div className="w-20 h-1.5 bg-gradient-to-r from-primary to-secondary mx-auto rounded-full" />
           </div>
@@ -204,7 +204,7 @@ const Experience = () => {
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: index * 0.08 }}
                 whileHover={{ y: -6 }}
-                className="group rounded-3xl border border-black/6 dark:border-white/10 bg-white/80 dark:bg-white/5 backdrop-blur-sm shadow-[0_18px_50px_rgba(0,0,0,0.08)] dark:shadow-[0_18px_50px_rgba(0,0,0,0.28)] p-6 md:p-8 lg:p-9 transition-all duration-300 hover:shadow-[0_26px_70px_rgba(0,0,0,0.12)] dark:hover:shadow-[0_26px_70px_rgba(0,0,0,0.38)]"
+                className="group rounded-3xl border border-black/6 dark:border-white/10 bg-white/80 dark:bg-white/5 p-6 md:p-8 lg:p-9 transition-all duration-300"
               >
                 <div className="flex flex-col gap-2 md:flex-row md:items-start md:justify-between">
                   <div>
