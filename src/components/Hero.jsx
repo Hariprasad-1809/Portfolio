@@ -12,8 +12,8 @@ const Hero = () => {
     <section id="home" className="min-h-screen flex items-center justify-center overflow-hidden relative pt-28 pb-16 lg:py-20">
       <div className="max-w-7xl w-full px-5 sm:px-8 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-[3fr_2fr] items-center gap-10 lg:gap-16">
-          <div className="max-w-2xl justify-self-center lg:justify-self-start text-center lg:text-left overflow-hidden">
-            <h1 className="font-body uppercase text-[2.5rem] sm:text-[4rem] md:text-[5rem] lg:text-[6.5rem] leading-[1.05] sm:leading-[0.95] tracking-wide text-charcoal dark:text-offwhite">
+          <div className="max-w-2xl lg:max-w-none justify-self-center lg:justify-self-start text-center lg:text-left overflow-hidden">
+            <h1 className="font-body uppercase text-4xl sm:text-5xl md:text-7xl lg:text-[5.5rem] xl:text-[6.5rem] sm:whitespace-nowrap leading-none tracking-wide text-charcoal dark:text-offwhite">
               {largeText}
             </h1>
             {/* Summary directly under the name */}
