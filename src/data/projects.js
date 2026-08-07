@@ -27,6 +27,47 @@ export const projects = [
   },
   {
     id: 2,
+    title: "AI Resume Analyzer",
+    shortDescription: "AI-powered resume analyzer that compares resumes with job roles using semantic similarity and LLM-powered insights.",
+    description: "An intelligent resume analysis platform that allows users to upload PDF resumes and compare them against a desired job role. It performs semantic matching using embeddings, identifies missing skills and keywords, analyzes resume sections, and provides personalized recommendations to improve the resume for better job alignment.",
+    tech: [
+      "React",
+      "FastAPI",
+      "Python",
+      "LangChain",
+      "Google Gemini",
+      "FAISS",
+      "Sentence Transformers",
+      "PyMuPDF",
+      "Tailwind CSS"
+    ],
+    image: "/projects/ai_resume_analyzer.png",
+    github: "https://github.com/Hariprasad-1809/resume_Analyzer",
+    live: "https://resume-analyzer-swart-two.vercel.app"
+  },
+  {
+    id: 3,
+    title: "GitSense AI",
+    shortDescription: "AI-powered GitHub repository assistant for understanding large codebases using Retrieval-Augmented Generation.",
+    description: "GitSense AI helps developers understand unfamiliar GitHub repositories by cloning the repository, indexing source code, generating embeddings, and answering code-related questions using Retrieval-Augmented Generation (RAG). It enables semantic code search, repository exploration, and context-aware explanations powered by Google Gemini.",
+    tech: [
+      "React",
+      "FastAPI",
+      "Python",
+      "LangChain",
+      "Google Gemini",
+      "ChromaDB",
+      "PostgreSQL",
+      "pgvector",
+      "Tree-sitter",
+      "Sentence Transformers"
+    ],
+    image: "/projects/gitsense_ai.png",
+    github: "https://github.com/Hariprasad-1809/GitSenseAi",
+    live: null
+  },
+  {
+    id: 4,
     title: "Lumina E-Commerce",
     shortDescription: "A modern premium frontend e-commerce application featuring product browsing, shopping cart, authentication, filtering, checkout flow, and responsive design.",
     description: "Lumina is a fully responsive frontend-only e-commerce platform built with React and Tailwind CSS. It includes dynamic product listings using FakeStoreAPI, advanced filtering, shopping cart management, simulated authentication, order history, profile management, and multiple business pages. User data and cart information are stored locally using browser storage.",
@@ -45,7 +86,7 @@ export const projects = [
     live: "https://e-commerce-lumina.vercel.app/"
   },
   {
-    id: 3,
+    id: 5,
     title: "Estate Prophet",
     shortDescription: "A machine learning powered house price prediction application with a modern Neo-Brutalism interface for instant real estate price estimation.",
     description: "Estate Prophet predicts residential property prices based on housing features such as BHK, parking, balcony, swimming pool, playground, floors, and total area. The prediction model is derived from a Random Forest Regression algorithm trained in Python, while the frontend performs instant calculations with an interactive Neo-Brutalism design.",
@@ -63,7 +104,7 @@ export const projects = [
     live: "https://housepricepredictionsmodel.netlify.app/"
   },
   {
-    id: 4,
+    id: 6,
     title: "Random Password Generator",
     shortDescription: "A responsive web application that generates strong and secure passwords with customizable options for improved online security.",
     description: "This application allows users to instantly generate random passwords with configurable length and character combinations including uppercase letters, lowercase letters, numbers, and special symbols. It also includes one-click password copy functionality and a clean responsive interface.",
@@ -77,7 +118,7 @@ export const projects = [
     live: "https://random-password-generator-beta-wheat.vercel.app/"
   },
   {
-    id: 5,
+    id: 7,
     title: "Calculator",
     shortDescription: "A responsive calculator application capable of performing standard arithmetic operations with a clean and intuitive interface.",
     description: "A simple calculator built using HTML, CSS, and JavaScript that performs addition, subtraction, multiplication, division, decimal calculations, and clear/reset operations while providing a smooth user experience across different screen sizes.",

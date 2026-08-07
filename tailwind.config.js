@@ -8,24 +8,24 @@ export default {
   theme: {
     extend: {
       colors: {
-        charcoal: '#121212',
-        offwhite: '#F5F5F7',
         accent: '#E63946',
-        'muted-gray': '#9CA3AF'
+        'accent-hover': '#D62B38',
+        darkBg: '#121212',
+        lightBg: '#FFFFFF',
       },
       fontFamily: {
-        heading: ['"Playfair Display"', 'serif'],
-        body: ['"Space Mono"', 'ui-monospace', 'SFMono-Regular', 'Menlo', 'monospace'],
+        mono: ['"Space Mono"', 'monospace', 'ui-monospace', 'SFMono-Regular', 'Menlo'],
+        sans: ['"Space Mono"', 'monospace'],
+        heading: ['"Space Mono"', 'monospace'],
       },
-      // Keep animations very subtle for quiet luxury
       animation: {
-        'float-slow': 'float-slow 6s ease-in-out infinite'
+        shake: 'shake 0.4s ease-in-out',
       },
       keyframes: {
-        'float-slow': {
-          '0%': { transform: 'translateY(0px)' },
-          '50%': { transform: 'translateY(-6px)' },
-          '100%': { transform: 'translateY(0px)' }
+        shake: {
+          '0%, 100%': { transform: 'translateX(0)' },
+          '20%, 60%': { transform: 'translateX(-6px)' },
+          '40%, 80%': { transform: 'translateX(6px)' },
         }
       }
     },

@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
+import { FaGraduationCap, FaBriefcase, FaHandsHelping, FaCalendarAlt } from 'react-icons/fa';
 
 const educationData = [
   {
@@ -8,10 +9,10 @@ const educationData = [
     department: 'Computer Science and Engineering (Cyber Security)',
     period: '2024 – 2028',
     points: [
-      'Currently pursuing a Bachelor\'s degree in Computer Science and Engineering with a specialization in Cyber Security.',
-      'Building strong foundations in Data Structures & Algorithms, Database Management Systems, Operating Systems, Computer Networks, and Software Engineering.',
+      'Currently pursuing a Bachelor\'s degree in Computer Science & Engineering specializing in Cyber Security.',
+      'Building strong foundations in Data Structures & Algorithms, DBMS, Operating Systems, Networks, and Software Engineering.',
       'Developing scalable full-stack web applications using React, FastAPI, Python, JavaScript, and SQL.',
-      'Passionate about building AI agent-based and modern web applications, with a strong curiosity to explore emerging technologies and create impactful real-world software solutions.'
+      'Experienced in building Retrieval-Augmented Generation (RAG) applications and REST APIs.'
     ]
   }
 ];
@@ -24,8 +25,8 @@ const experiences = [
     points: [
       'Working on modern web development projects focusing on frontend technologies.',
       'Building responsive and user-friendly interfaces using React and Tailwind CSS.',
-      'Collaborating with the team to develop scalable and maintainable web applications.',
-      'Improving UI performance and ensuring cross-device compatibility.'
+      'Collaborating with the engineering team to integrate REST APIs.',
+      'Improving rendering performance and ensuring cross-device compatibility.'
     ]
   },
   {
@@ -33,9 +34,9 @@ const experiences = [
     company: 'Sri Sairam Techno Incubation Center',
     period: 'Dec 2025 – Jan 2026',
     points: [
-      'Developed a fully functional e-commerce website as part of a team project.',
+      'Developed a fully functional e-commerce website as part of an incubation team project.',
       'Designed and implemented responsive UI components using HTML, CSS, JavaScript, and React.',
-      'Focus on frontend development including layout design, user interaction, and performance.',
+      'Focused on frontend development including layout design, user interaction, and performance.',
       'Collaborated with team members to integrate frontend with backend systems.'
     ]
   }
@@ -47,7 +48,7 @@ const volunteerExperiences = [
     company: 'Event Coordination',
     period: 'Volunteer Experience',
     points: [
-      'Contributed to event coordination and smooth execution.'
+      'Contributed to event coordination and smooth execution of technical workshops.'
     ]
   },
   {
@@ -69,178 +70,140 @@ const volunteerExperiences = [
 ];
 
 const Experience = () => {
+  const [activeTab, setActiveTab] = useState('experience');
+
   return (
-    <section id="experience" className="pt-16 sm:pt-20 pb-16 px-5 sm:pb-20 sm:px-8 md:pb-20 md:px-8 lg:pb-24 lg:px-12 xl:px-24 bg-primary/5 relative">
-      <div className="max-w-6xl mx-auto">
-        
-        {/* Education Section */}
-        <div className="text-center mb-10 md:mb-12">
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-[2rem] md:text-[3rem] font-extrabold mb-4 text-black dark:text-white"
+    <section id="experience" className="section-padding">
+      {/* Header with mb-8 md:mb-10 */}
+      <div className="mb-8 md:mb-10 border-b border-black/10 dark:border-white/10 pb-4 flex flex-col md:flex-row md:items-end justify-between gap-4">
+        <div>
+          <h2 className="text-3xl sm:text-4xl font-mono font-bold text-black dark:text-white uppercase tracking-tight">
+            / Experience_&_Education
+          </h2>
+          <p className="mt-2 text-sm text-gray-600 dark:text-gray-400 font-mono">
+            Academic timeline, engineering internships, and volunteer leadership.
+          </p>
+        </div>
+
+        {/* Tab Filters */}
+        <div className="flex gap-2 font-mono text-xs">
+          <button
+            onClick={() => setActiveTab('experience')}
+            className={`px-4 py-2 rounded-lg border transition-colors flex items-center gap-1.5 ${
+              activeTab === 'experience'
+                ? 'bg-[#E63946] text-white border-[#E63946] font-bold'
+                : 'border-black/10 dark:border-white/10 text-gray-700 dark:text-gray-300 hover:border-black dark:hover:border-white'
+            }`}
           >
-            Education
-          </motion.h2>
-          <div className="w-20 h-1.5 bg-gradient-to-r from-primary to-secondary mx-auto rounded-full" />
-        </div>
-
-        <div className="mx-auto max-w-4xl space-y-8 md:space-y-10 mb-20">
-          {educationData.map((edu, index) => (
-            <motion.article
-              key={`${edu.degree}-${edu.institution}`}
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: index * 0.08 }}
-              whileHover={{ y: -6 }}
-              className="group rounded-3xl border border-black/6 dark:border-white/10 bg-white/80 dark:bg-white/5 p-6 md:p-8 lg:p-9 transition-all duration-300"
-            >
-              <div className="flex flex-col gap-2 md:flex-row md:items-start md:justify-between">
-                <div>
-                  <p className="text-sm uppercase tracking-[0.22em] text-gray-900 dark:text-gray-300 mb-2 font-mono">
-                    01
-                  </p>
-                  <h3 className="text-2xl md:text-3xl font-bold tracking-tight text-black dark:text-white">
-                    {edu.degree}
-                  </h3>
-                  <p className="mt-1 text-sm font-semibold text-primary">
-                    {edu.department}
-                  </p>
-                  <p className="mt-2 text-base md:text-lg font-medium text-gray-900 dark:text-gray-300">
-                    {edu.institution}
-                  </p>
-                </div>
-
-                <span className="inline-flex w-fit items-center rounded-full px-3 py-1 text-sm text-gray-900 dark:text-gray-300 bg-black/5 dark:bg-white/10">
-                  {edu.period}
-                </span>
-              </div>
-
-              <div className="thin-divider my-5 md:my-6" />
-
-              <ul className="space-y-3">
-                {edu.points.map((point) => (
-                  <li key={point} className="flex gap-3 text-sm md:text-base leading-relaxed text-gray-900 dark:text-gray-300">
-                    <span className="text-primary mt-1.5 shrink-0">•</span>
-                    <span>{point}</span>
-                  </li>
-                ))}
-              </ul>
-            </motion.article>
-          ))}
-        </div>
-
-        {/* Experience Section */}
-        <div className="text-center mb-10 md:mb-12">
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-[2rem] md:text-[3rem] font-extrabold mb-4 text-black dark:text-white"
+            <FaBriefcase className="w-3 h-3" /> Internships
+          </button>
+          <button
+            onClick={() => setActiveTab('education')}
+            className={`px-4 py-2 rounded-lg border transition-colors flex items-center gap-1.5 ${
+              activeTab === 'education'
+                ? 'bg-[#E63946] text-white border-[#E63946] font-bold'
+                : 'border-black/10 dark:border-white/10 text-gray-700 dark:text-gray-300 hover:border-black dark:hover:border-white'
+            }`}
           >
-            My Experience
-          </motion.h2>
-          <div className="w-20 h-1.5 bg-gradient-to-r from-primary to-secondary mx-auto rounded-full" />
+            <FaGraduationCap className="w-3.5 h-3.5" /> Education
+          </button>
+          <button
+            onClick={() => setActiveTab('volunteer')}
+            className={`px-4 py-2 rounded-lg border transition-colors flex items-center gap-1.5 ${
+              activeTab === 'volunteer'
+                ? 'bg-[#E63946] text-white border-[#E63946] font-bold'
+                : 'border-black/10 dark:border-white/10 text-gray-700 dark:text-gray-300 hover:border-black dark:hover:border-white'
+            }`}
+          >
+            <FaHandsHelping className="w-3 h-3" /> Volunteer
+          </button>
         </div>
+      </div>
 
-        <div className="mx-auto max-w-4xl space-y-8 md:space-y-10 mb-20">
-          {experiences.map((exp, index) => (
-            <motion.article
-              key={`${exp.role}-${exp.company}`}
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: index * 0.08 }}
-              whileHover={{ y: -6 }}
-              className="group rounded-3xl border border-black/6 dark:border-white/10 bg-white/80 dark:bg-white/5 p-6 md:p-8 lg:p-9 transition-all duration-300"
-            >
-              <div className="flex flex-col gap-2 md:flex-row md:items-start md:justify-between">
-                <div>
-                  <p className="text-sm uppercase tracking-[0.22em] text-gray-900 dark:text-gray-300 mb-2 font-mono">
-                    {String(index + 1).padStart(2, '0')}
-                  </p>
-                  <h3 className="text-2xl md:text-3xl font-bold tracking-tight text-black dark:text-white">
-                    {exp.role}
-                  </h3>
-                  <p className="mt-2 text-base md:text-lg font-medium text-gray-900 dark:text-gray-300">
-                    {exp.company}
-                  </p>
-                </div>
-
-                <span className="inline-flex w-fit items-center rounded-full px-3 py-1 text-sm text-gray-900 dark:text-gray-300 bg-black/5 dark:bg-white/10">
-                  {exp.period}
-                </span>
-              </div>
-
-              <div className="thin-divider my-5 md:my-6" />
-
-              <ul className="space-y-3">
-                {exp.points.map((point) => (
-                  <li key={point} className="flex gap-3 text-sm md:text-base leading-relaxed text-gray-900 dark:text-gray-300">
-                    <span className="text-primary mt-1.5 shrink-0">•</span>
-                    <span>{point}</span>
-                  </li>
-                ))}
-              </ul>
-            </motion.article>
+      {/* Timeline Items */}
+      <div className="max-w-4xl mx-auto space-y-6">
+        {activeTab === 'experience' &&
+          experiences.map((exp, index) => (
+            <TimelineCard
+              key={exp.role + exp.company}
+              title={exp.role}
+              subtitle={exp.company}
+              period={exp.period}
+              points={exp.points}
+              index={index}
+            />
           ))}
-        </div>
 
-        {/* Volunteer Experience Section */}
-        <div className="mx-auto max-w-4xl mt-12 md:mt-14">
-          <div className="text-center mb-10 md:mb-12">
-            <h3 className="text-[1.75rem] md:text-[2.25rem] font-extrabold mb-3 text-black dark:text-white">Volunteer <span className="text-primary">Experience</span></h3>
-            <div className="w-20 h-1.5 bg-gradient-to-r from-primary to-secondary mx-auto rounded-full" />
-          </div>
+        {activeTab === 'education' &&
+          educationData.map((edu, index) => (
+            <TimelineCard
+              key={edu.degree}
+              title={edu.degree}
+              subtitle={edu.institution}
+              extra={edu.department}
+              period={edu.period}
+              points={edu.points}
+              index={index}
+            />
+          ))}
 
-          <div className="space-y-8 md:space-y-10">
-            {volunteerExperiences.map((exp, index) => (
-              <motion.article
-                key={`${exp.role}-${exp.company}`}
-                initial={{ opacity: 0, y: 24 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: index * 0.08 }}
-                whileHover={{ y: -6 }}
-                className="group rounded-3xl border border-black/6 dark:border-white/10 bg-white/80 dark:bg-white/5 p-6 md:p-8 lg:p-9 transition-all duration-300"
-              >
-                <div className="flex flex-col gap-2 md:flex-row md:items-start md:justify-between">
-                  <div>
-                    <p className="text-sm uppercase tracking-[0.22em] text-gray-900 dark:text-gray-300 mb-2 font-mono">
-                      {String(index + 1).padStart(2, '0')}
-                    </p>
-                    <h4 className="text-2xl md:text-3xl font-bold tracking-tight text-black dark:text-white">
-                      {exp.role}
-                    </h4>
-                    <p className="mt-2 text-base md:text-lg font-medium text-gray-900 dark:text-gray-300">
-                      {exp.company}
-                    </p>
-                  </div>
-
-                  <span className="inline-flex w-fit items-center rounded-full px-3 py-1 text-sm text-gray-900 dark:text-gray-300 bg-black/5 dark:bg-white/10">
-                    {exp.period}
-                  </span>
-                </div>
-
-                <div className="thin-divider my-5 md:my-6" />
-
-                <ul className="space-y-3">
-                  {exp.points.map((point) => (
-                    <li key={point} className="flex gap-3 text-sm md:text-base leading-relaxed text-gray-900 dark:text-gray-300">
-                      <span className="text-primary mt-1.5 shrink-0">•</span>
-                      <span>{point}</span>
-                    </li>
-                  ))}
-                </ul>
-              </motion.article>
-            ))}
-          </div>
-        </div>
-
+        {activeTab === 'volunteer' &&
+          volunteerExperiences.map((vol, index) => (
+            <TimelineCard
+              key={vol.role}
+              title={vol.role}
+              subtitle={vol.company}
+              period={vol.period}
+              points={vol.points}
+              index={index}
+            />
+          ))}
       </div>
     </section>
+  );
+};
+
+const TimelineCard = ({ title, subtitle, extra, period, points, index }) => {
+  return (
+    <motion.article
+      initial={{ opacity: 0, y: 15 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.35, delay: index * 0.08 }}
+      whileHover={{ scale: 1.01 }}
+      className="card-minimal p-5 md:p-7 relative border-l-4 border-l-[#E63946]"
+    >
+      <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-2 mb-3">
+        <div>
+          <h3 className="text-xl font-mono font-bold text-black dark:text-white">
+            {title}
+          </h3>
+          <p className="text-sm font-mono font-semibold text-gray-700 dark:text-gray-300">
+            {subtitle}
+          </p>
+          {extra && (
+            <p className="text-xs font-mono text-[#E63946] mt-0.5">
+              {extra}
+            </p>
+          )}
+        </div>
+
+        <span className="inline-flex items-center gap-1.5 text-xs font-mono px-3 py-1 rounded border border-black/10 dark:border-white/10 w-fit text-gray-700 dark:text-gray-300">
+          <FaCalendarAlt className="w-3 h-3 text-[#E63946]" /> {period}
+        </span>
+      </div>
+
+      <div className="w-full h-px bg-black/5 dark:bg-white/5 my-3" />
+
+      <ul className="space-y-2">
+        {points.map((point) => (
+          <li key={point} className="text-xs sm:text-sm font-mono leading-relaxed text-gray-700 dark:text-gray-300 flex items-start gap-2">
+            <span className="text-[#E63946] font-bold">&gt;</span>
+            <span>{point}</span>
+          </li>
+        ))}
+      </ul>
+    </motion.article>
   );
 };
 

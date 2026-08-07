@@ -3,59 +3,63 @@ import { FaGithub, FaLinkedin, FaTwitter, FaArrowUp } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 
 /**
- * Minimal Footer with social links and scroll-to-top functionality.
+ * Solid minimal footer with pt-12 max top padding and scroll-to-top feature.
  */
 const Footer = () => {
   return (
-    <footer className="py-12 px-6 border-t border-primary/10 bg-white/40 dark:bg-white/[0.02] backdrop-blur-sm text-gray-900 dark:text-gray-300">
-      <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-8">
-        {/* Copyright */}
-        <div className="text-center md:text-left">
-          <p className="text-lg font-bold font-heading mb-2 tracking-tight text-black dark:text-white">Hariprasad H</p>
-          <p className="text-sm text-gray-900 dark:text-gray-300">
-            &copy; {new Date().getFullYear()} All rights reserved.
-          </p>
-        </div>
-
-        {/* Social Icons */}
-        <div className="flex items-center gap-6">
-          <a 
-            href="https://github.com/Hariprasad-1809" 
-            target="_blank" 
-            rel="noopener noreferrer" 
-            aria-label="GitHub"
-            className="text-2xl w-11 h-11 rounded-xl grid place-items-center bg-primary/5 hover:bg-primary/15 hover:text-primary transition-all duration-300 text-gray-900 dark:text-gray-300"
-          >
-            <FaGithub />
-          </a>
-          <a 
-            href="https://www.linkedin.com/in/hariprasad-h/" 
-            target="_blank" 
-            rel="noopener noreferrer" 
-            aria-label="LinkedIn"
-            className="text-2xl w-11 h-11 rounded-xl grid place-items-center bg-primary/5 hover:bg-primary/15 hover:text-primary transition-all duration-300 text-gray-900 dark:text-gray-300"
-          >
-            <FaLinkedin />
-          </a>
-          <a 
-            href="http://x.com/hariprasadh1809" 
-            target="_blank" 
-            rel="noopener noreferrer" 
-            aria-label="Twitter"
-            className="text-2xl w-11 h-11 rounded-xl grid place-items-center bg-primary/5 hover:bg-primary/15 hover:text-primary transition-all duration-300 text-gray-900 dark:text-gray-300"
-          >
-            <FaTwitter />
-          </a>
-        </div>
-
-        {/* Scroll Top */}
+    <footer className="border-t border-black/10 dark:border-white/10 bg-white dark:bg-[#121212] pt-12 pb-10 px-5 text-center">
+      <div className="max-w-7xl mx-auto flex flex-col items-center justify-center space-y-6">
+        
+        {/* Monospace Logo */}
         <Link
           to="/"
-          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-          className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center cursor-pointer hover:bg-primary hover:text-white transition-all duration-300 group"
+          className="font-mono font-bold text-base text-black dark:text-white tracking-wider hover:text-[#E63946] transition-colors"
         >
-          <FaArrowUp className="group-hover:-translate-y-1 transition-transform" />
+          [HARIPRASAD_H]
         </Link>
+
+        {/* Social Icons */}
+        <div className="flex items-center gap-4 text-gray-700 dark:text-gray-300">
+          <a
+            href="https://github.com/Hariprasad-1809"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="GitHub Profile"
+            className="p-2.5 rounded-lg border border-black/10 dark:border-white/10 hover:text-[#E63946] hover:border-[#E63946] transition-colors"
+          >
+            <FaGithub className="w-4 h-4" />
+          </a>
+          <a
+            href="https://www.linkedin.com/in/hariprasad-h"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="LinkedIn Profile"
+            className="p-2.5 rounded-lg border border-black/10 dark:border-white/10 hover:text-[#E63946] hover:border-[#E63946] transition-colors"
+          >
+            <FaLinkedin className="w-4 h-4" />
+          </a>
+          <a
+            href="http://x.com/hariprasadh1809"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Twitter Profile"
+            className="p-2.5 rounded-lg border border-black/10 dark:border-white/10 hover:text-[#E63946] hover:border-[#E63946] transition-colors"
+          >
+            <FaTwitter className="w-4 h-4" />
+          </a>
+        </div>
+
+        {/* Copyright & Scroll Top */}
+        <div className="flex flex-col sm:flex-row items-center justify-between w-full max-w-md pt-4 border-t border-black/5 dark:border-white/5 text-xs font-mono text-gray-500 gap-2">
+          <span>&copy; {new Date().getFullYear()} HARIPRASAD H. ALL RIGHTS RESERVED.</span>
+          <button
+            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+            className="hover:text-[#E63946] transition-colors flex items-center gap-1"
+          >
+            TOP <FaArrowUp className="w-3 h-3" />
+          </button>
+        </div>
+
       </div>
     </footer>
   );

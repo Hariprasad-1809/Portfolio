@@ -10,16 +10,15 @@ import ContactPage from './pages/ContactPage';
 import ScrollToTop from './components/ScrollToTop';
 
 /**
- * Main Application Component.
- * Orchestrates all sections and provides global theme context.
+ * App root component with minimal structure and clean routing.
  */
 function App() {
   return (
     <ThemeProvider>
-      <div className="min-h-screen relative overflow-x-clip">
+      <div className="min-h-screen bg-white dark:bg-[#121212] text-gray-900 dark:text-gray-100 font-mono transition-colors duration-200">
         <Navbar />
         <ScrollToTop />
-        <main className="relative z-10">
+        <main className="relative pt-16">
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/skills" element={<SkillsPage />} />

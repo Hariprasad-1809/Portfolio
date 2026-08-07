@@ -2,15 +2,10 @@ import React, { createContext, useContext, useEffect, useState } from 'react';
 
 const ThemeContext = createContext();
 
-/**
- * Context provider to manage dark/light mode state and persistence.
- * @param {Object} props
- * @param {React.ReactNode} props.children
- */
 export const ThemeProvider = ({ children }) => {
   const [isDarkMode, setIsDarkMode] = useState(() => {
     const saved = localStorage.getItem('theme');
-    return saved ? saved === 'dark' : true; // Default to dark
+    return saved ? saved === 'dark' : true;
   });
 
   useEffect(() => {

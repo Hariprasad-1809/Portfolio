@@ -1,47 +1,108 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
+import { FaChevronDown } from 'react-icons/fa';
 
 /**
- * Master Simple hero: large static typographic name and profile photo.
+ * Text-only centered Hero component with Space Mono typography, exact bio,
+ * crimson role tag, rounded pill CTAs, pb-12 bottom spacing, and staggered Framer Motion animation.
  */
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.15,
+      delayChildren: 0.1,
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 25 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.5, ease: [0.25, 0.1, 0.25, 1.0] },
+  },
+};
+
 const Hero = () => {
-  const largeText = 'HARIPRASAD H';
+  const scrollToProjects = () => {
+    const section = document.getElementById('projects');
+    if (section) {
+      section.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
 
-  // simple, clear presentation: monospace uppercase name and larger, clear photo
   return (
-    <section id="home" className="flex items-center justify-center overflow-hidden relative pt-28 pb-0 lg:pt-36">
-      <div className="max-w-7xl w-full px-5 sm:px-8 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-[3fr_2fr] items-center gap-10 lg:gap-16">
-          <div className="max-w-2xl lg:max-w-none justify-self-center lg:justify-self-start text-center lg:text-left overflow-hidden">
-            <h1 className="font-body uppercase text-4xl sm:text-5xl md:text-6xl lg:text-[5rem] xl:text-[6rem] sm:whitespace-nowrap leading-none tracking-wide text-charcoal dark:text-offwhite">
-              {largeText}
-            </h1>
-            {/* Summary directly under the name */}
-            <div className="mt-8">
-              <p className="text-base lg:text-lg leading-relaxed text-gray-900 dark:text-gray-300 max-w-2xl mx-auto lg:mx-0">Product-focused Frontend Developer with hands-on experience in building scalable full-stack applications using React, FastAPI, and MySQL. Proficient in Python and Java, with a strong foundation in backend development, problem-solving, and data-driven applications. Skilled in developing responsive and user-centric interfaces, designing RESTful APIs, and implementing secure authentication systems. Experienced in working within Linux environments, managing development workflows, and deploying modern web applications. Passionate about crafting intuitive user experiences and writing clean, maintainable, and efficient code, with a strong drive to build impactful real-world solutions while continuously learning modern technologies.</p>
+    <section id="home" className="min-h-screen flex flex-col items-center justify-center pt-20 pb-12 px-5 sm:px-8 relative text-center">
+      <motion.div
+        variants={containerVariants}
+        initial="hidden"
+        animate="visible"
+        className="max-w-2xl mx-auto flex flex-col items-center justify-center space-y-6"
+      >
+        {/* Name Header */}
+        <motion.h1
+          variants={itemVariants}
+          className="text-5xl md:text-7xl font-mono font-bold tracking-tight text-black dark:text-white"
+        >
+          HARIPRASAD H
+        </motion.h1>
 
-              <div className="mt-8 flex flex-wrap items-center justify-center lg:justify-start gap-3">
-                <Link to="/projects" className="inline-block">
-                  <button className="btn-primary min-h-[44px] px-6">View Projects</button>
-                </Link>
-                <Link to="/contact" className="inline-block">
-                  <button className="px-6 py-2.5 rounded-full border border-black/15 dark:border-white/20 text-sm hover:bg-black/5 dark:hover:bg-white/5 transition-colors min-h-[44px]">Contact</button>
-                </Link>
-              </div>
-            </div>
-          </div>
+        {/* Role Tag in Crimson #E63946 */}
+        <motion.div variants={itemVariants}>
+          <span className="font-mono text-base md:text-lg font-bold text-[#E63946] tracking-wide">
+            Full-Stack & AI Engineer
+          </span>
+        </motion.div>
 
-          <div className="w-full flex justify-center lg:justify-end">
-            <img
-              src="/profile.jpeg"
-              alt="Profile"
-              onError={(e) => { e.currentTarget.src = '/profile-sample.svg'; }}
-              className="w-64 h-64 sm:w-80 sm:h-80 md:w-[380px] md:h-[380px] max-w-full rounded-2xl object-cover border border-black/6 bg-white shadow-md"
-              style={{ objectPosition: '50% 18%' }}
-            />
-          </div>
-        </div>
-      </div>
+        {/* Bio Paragraph */}
+        <motion.p
+          variants={itemVariants}
+          className="text-gray-600 dark:text-gray-400 font-mono text-sm md:text-base leading-relaxed text-center"
+        >
+          Computer Science Engineering student specializing in Cyber Security with strong skills in Python, SQL, and full-stack web development. Experienced in building scalable applications using React, FastAPI, and MySQL, developing REST APIs, implementing authentication systems, and deploying web applications. Completed a Frontend Development internship focused on responsive UI development and modern web technologies. Passionate about software engineering, algorithms, and problem solving, seeking a Software Development Internship to build impactful and scalable software solutions.
+        </motion.p>
+
+        {/* Centered CTA Buttons */}
+        <motion.div
+          variants={itemVariants}
+          className="flex flex-wrap items-center justify-center gap-4 pt-2"
+        >
+          <button
+            onClick={scrollToProjects}
+            className="bg-[#E63946] hover:bg-[#d62b38] text-white font-mono font-bold text-sm px-7 py-3.5 rounded-full transition-all duration-200 shadow-sm hover:scale-[1.02] active:scale-100"
+          >
+            View Projects
+          </button>
+
+          <Link to="/contact">
+            <button className="border border-black/20 dark:border-white/20 hover:bg-black/5 dark:hover:bg-white/5 text-black dark:text-white font-mono font-bold text-sm px-7 py-3.5 rounded-full transition-all duration-200 hover:scale-[1.02] active:scale-100">
+              Contact Me
+            </button>
+          </Link>
+        </motion.div>
+      </motion.div>
+
+      {/* Bouncing Scroll Down Chevron Indicator */}
+      <motion.div
+        initial={{ opacity: 0, y: -10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.8, duration: 0.5 }}
+        className="absolute bottom-6 left-1/2 -translate-x-1/2 cursor-pointer"
+        onClick={scrollToProjects}
+        aria-label="Scroll to projects"
+      >
+        <motion.div
+          animate={{ y: [0, 8, 0] }}
+          transition={{ duration: 1.8, repeat: Infinity, ease: 'easeInOut' }}
+          className="text-gray-400 hover:text-[#E63946] transition-colors p-2"
+        >
+          <FaChevronDown className="w-5 h-5" />
+        </motion.div>
+      </motion.div>
     </section>
   );
 };

@@ -1,53 +1,58 @@
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
-import { FaEnvelope, FaLinkedin, FaGithub, FaMapMarkerAlt } from 'react-icons/fa';
+import { motion, AnimatePresence } from 'framer-motion';
+import { FaEnvelope, FaLinkedin, FaGithub, FaPaperPlane, FaCheckCircle, FaExclamationCircle } from 'react-icons/fa';
 import emailjs from '@emailjs/browser';
 
 /**
- * Contact section with split layout: info and form.
- * Form submissions are sent via EmailJS.
+ * Minimal Contact form component with mb-8 md:mb-10 heading gap, p-5 md:p-7 card padding, shake validation, and EmailJS integration.
  */
 const Contact = () => {
-  // Separate states for contact form fields
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
   const [loading, setLoading] = useState(false);
-  const [status, setStatus] = useState(''); // 'success', 'error', or ''
+  const [status, setStatus] = useState(''); // 'success' or 'error'
+  const [errorMsg, setErrorMsg] = useState('');
+  const [isShaking, setIsShaking] = useState(false);
 
-  // Handle form submission and send email via EmailJS
-  const sendEmail = async (e) => {
-    // Prevent default form submission
-    e.preventDefault();
-
-    // Field validations
+  const validate = () => {
     if (!name.trim()) {
-      alert("Name is required");
-      return;
+      return "Name is required";
     }
-
     if (!email.trim()) {
-      alert("Email is required");
-      return;
+      return "Email address is required";
     }
-
-    // Validate email format using standard regex
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
-      alert("Please enter a valid email address");
-      return;
+      return "Please enter a valid email address";
     }
-
     if (!message.trim()) {
-      alert("Message is required");
+      return "Message content is required";
+    }
+    return null;
+  };
+
+  const triggerShake = () => {
+    setIsShaking(true);
+    setTimeout(() => setIsShaking(false), 400);
+  };
+
+  const sendEmail = async (e) => {
+    e.preventDefault();
+    const validationError = validate();
+
+    if (validationError) {
+      setErrorMsg(validationError);
+      setStatus('error');
+      triggerShake();
       return;
     }
 
     setLoading(true);
     setStatus('');
+    setErrorMsg('');
 
     try {
-      // Send email using EmailJS with parameters mapping
       await emailjs.send(
         import.meta.env.VITE_EMAILJS_SERVICE_ID,
         import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
@@ -60,20 +65,14 @@ const Contact = () => {
       );
 
       setStatus('success');
-      // Reset all fields after successful dispatch
       setName('');
       setEmail('');
       setMessage('');
-      
-      // Clear success status message after 5 seconds
-      setTimeout(() => setStatus(''), 5000);
-    } catch (error)  {
-      console.log("EmailJS Error:", error);
-      console.log("Status:", error.status);
-      console.log("Text:", error.text);
-      console.log("Full Error:", JSON.stringify(error, null, 2));
-      setTimeout(() => setStatus(''), 5000);
-      setStatus("error");
+    } catch (err) {
+      console.error("EmailJS Error:", err);
+      setErrorMsg("Failed to dispatch message. Please try again or email directly.");
+      setStatus('error');
+      triggerShake();
     } finally {
       setLoading(false);
     }
@@ -81,153 +80,181 @@ const Contact = () => {
 
   return (
     <section id="contact" className="section-padding">
-      <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-16 md:mb-20">
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-[2rem] md:text-[3rem] font-extrabold mb-4 text-black dark:text-white"
-          >
-            Get In <span className="text-primary">Touch</span>
-          </motion.h2>
-          <div className="w-20 h-1.5 bg-gradient-to-r from-primary to-secondary mx-auto rounded-full" />
+      {/* Header with mb-8 md:mb-10 */}
+      <div className="mb-8 md:mb-10 border-b border-black/10 dark:border-white/10 pb-4">
+        <h2 className="text-3xl sm:text-4xl font-mono font-bold text-black dark:text-white uppercase tracking-tight">
+          / Contact
+        </h2>
+        <p className="mt-2 text-sm text-gray-600 dark:text-gray-400 font-mono">
+          Get in touch for internships, full-time engineering roles, or project proposals.
+        </p>
+      </div>
+
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
+        {/* Left Side: Contact Vectors (5 cols) */}
+        <div className="lg:col-span-5 space-y-4">
+          <div className="card-minimal p-5 md:p-7 space-y-3">
+            <h3 className="text-xl font-mono font-bold text-black dark:text-white">
+              Direct Communication
+            </h3>
+            <p className="text-xs font-mono text-gray-600 dark:text-gray-400 leading-relaxed">
+              I am actively looking for software development and AI engineering opportunities. Feel free to reach out directly.
+            </p>
+          </div>
+
+          <div className="space-y-3">
+            <a
+              href="mailto:hariprasadh1809@gmail.com"
+              className="card-minimal p-4 flex items-center gap-4 hover:border-[#E63946] transition-colors group"
+            >
+              <div className="p-3 rounded-lg bg-black/5 dark:bg-white/5 text-[#E63946]">
+                <FaEnvelope className="w-5 h-5" />
+              </div>
+              <div className="overflow-hidden">
+                <p className="text-[10px] font-mono uppercase text-gray-400">Email</p>
+                <p className="text-xs font-mono font-bold text-black dark:text-white group-hover:text-[#E63946] transition-colors truncate">
+                  hariprasadh1809@gmail.com
+                </p>
+              </div>
+            </a>
+
+            <a
+              href="https://www.linkedin.com/in/hariprasad-h"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="card-minimal p-4 flex items-center gap-4 hover:border-[#E63946] transition-colors group"
+            >
+              <div className="p-3 rounded-lg bg-black/5 dark:bg-white/5 text-[#E63946]">
+                <FaLinkedin className="w-5 h-5" />
+              </div>
+              <div className="overflow-hidden">
+                <p className="text-[10px] font-mono uppercase text-gray-400">LinkedIn</p>
+                <p className="text-xs font-mono font-bold text-black dark:text-white group-hover:text-[#E63946] transition-colors truncate">
+                  linkedin.com/in/hariprasad-h
+                </p>
+              </div>
+            </a>
+
+            <a
+              href="https://github.com/Hariprasad-1809"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="card-minimal p-4 flex items-center gap-4 hover:border-[#E63946] transition-colors group"
+            >
+              <div className="p-3 rounded-lg bg-black/5 dark:bg-white/5 text-[#E63946]">
+                <FaGithub className="w-5 h-5" />
+              </div>
+              <div className="overflow-hidden">
+                <p className="text-[10px] font-mono uppercase text-gray-400">GitHub</p>
+                <p className="text-xs font-mono font-bold text-black dark:text-white group-hover:text-[#E63946] transition-colors truncate">
+                  github.com/Hariprasad-1809
+                </p>
+              </div>
+            </a>
+          </div>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20">
-          {/* Contact Info */}
-          <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            className="space-y-8"
+        {/* Right Side: Form (7 cols) */}
+        <div className="lg:col-span-7">
+          <form
+            onSubmit={sendEmail}
+            className={`card-minimal p-5 md:p-7 space-y-4 ${isShaking ? 'animate-shake' : ''}`}
           >
-            <div>
-              <h3 className="text-3xl font-bold mb-6 font-heading tracking-tight text-black dark:text-white">Let's talk about everything!</h3>
-              <p className="text-lg text-gray-900 dark:text-gray-300 leading-relaxed mb-8">
-                Don't like forms? Send me an email or find me on social media. 
-                I'm always open to discussing new projects, creative ideas or 
-                opportunities to be part of your visions.
-              </p>
-            </div>
+            {/* Inline Error Message */}
+            <AnimatePresence>
+              {status === 'error' && errorMsg && (
+                <motion.div
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  className="p-3 rounded-lg border border-red-500/30 bg-red-500/10 text-red-600 dark:text-red-400 text-xs font-mono flex items-center gap-2"
+                >
+                  <FaExclamationCircle className="w-4 h-4 shrink-0" />
+                  <span>{errorMsg}</span>
+                </motion.div>
+              )}
 
-            <div className="space-y-6">
-              <div className="flex items-center gap-6 group">
-                <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center group-hover:bg-primary transition-colors duration-300 shadow-soft">
-                  <FaEnvelope className="text-primary group-hover:text-white text-xl" />
-                </div>
-                <div>
-                  <p className="text-sm uppercase tracking-widest font-bold text-gray-900 dark:text-gray-300">Email</p>
-                  <a href="mailto:hariprasadh1809@gmail.com" className="text-lg font-bold text-black dark:text-white hover:text-primary transition-colors duration-300">
-                    hariprasadh1809@gmail.com
-                  </a>
-                </div>
-              </div>
-
-              <div className="flex items-center gap-6 group">
-                <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center group-hover:bg-primary transition-colors duration-300 shadow-soft">
-                  <FaLinkedin className="text-primary group-hover:text-white text-xl" />
-                </div>
-                <div>
-                  <p className="text-sm uppercase tracking-widest font-bold text-gray-900 dark:text-gray-300">LinkedIn</p>
-                  <a 
-                    href="https://www.linkedin.com/in/hariprasad-h" 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="text-lg font-bold text-black dark:text-white hover:text-primary transition-colors duration-300"
-                  >
-                    linkedin.com/in/hariprasad-h
-                  </a>
-                </div>
-              </div>
-
-              <div className="flex items-center gap-6 group">
-                <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center group-hover:bg-primary transition-colors duration-300 shadow-soft">
-                  <FaGithub className="text-primary group-hover:text-white text-xl" />
-                </div>
-                <div>
-                  <p className="text-sm uppercase tracking-widest font-bold text-gray-900 dark:text-gray-300">GitHub</p>
-                  <a 
-                    href="https://github.com/Hariprasad-1809" 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="text-lg font-bold text-black dark:text-white hover:text-primary transition-colors duration-300"
-                  >
-                    github.com/Hariprasad-1809
-                  </a>
-                </div>
-              </div>
-            </div>
-          </motion.div>
-
-          {/* Contact Form */}
-          <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            className="card p-8 md:p-10"
-          >
-            <form onSubmit={sendEmail} className="space-y-6">
-              {/* Status Messages */}
+              {/* Typed / Animated Success Message */}
               {status === 'success' && (
-                <div className="bg-green-100 dark:bg-green-900 border border-green-400 dark:border-green-700 text-green-700 dark:text-green-100 px-4 py-3 rounded-lg">
-                  Message sent successfully!
-                </div>
+                <motion.div
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  className="p-4 rounded-lg border border-emerald-500/30 bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 text-xs font-mono flex items-center gap-2.5"
+                >
+                  <FaCheckCircle className="w-4 h-4 shrink-0 text-emerald-500" />
+                  <span>&gt; TRANSMISSION_RECEIVED: Message sent successfully! I will get back to you shortly.</span>
+                </motion.div>
               )}
-              {status === 'error' && (
-                <div className="bg-red-100 dark:bg-red-900 border border-red-400 dark:border-red-700 text-red-700 dark:text-red-100 px-4 py-3 rounded-lg">
-                  Failed to send message. Please try again.
-                </div>
+            </AnimatePresence>
+
+            {/* Name Input */}
+            <div className="space-y-1">
+              <label htmlFor="name" className="text-xs font-mono font-bold text-black dark:text-white">
+                NAME *
+              </label>
+              <input
+                type="text"
+                id="name"
+                value={name}
+                onChange={(e) => {
+                  setName(e.target.value);
+                  if (status === 'error') setStatus('');
+                }}
+                placeholder="Your Name"
+                className="w-full px-4 py-3 rounded-lg bg-transparent border border-black/10 dark:border-white/10 text-xs font-mono text-black dark:text-white placeholder:text-gray-400 outline-none focus:border-[#E63946] transition-colors"
+              />
+            </div>
+
+            {/* Email Input */}
+            <div className="space-y-1">
+              <label htmlFor="email" className="text-xs font-mono font-bold text-black dark:text-white">
+                EMAIL *
+              </label>
+              <input
+                type="email"
+                id="email"
+                value={email}
+                onChange={(e) => {
+                  setEmail(e.target.value);
+                  if (status === 'error') setStatus('');
+                }}
+                placeholder="your.email@example.com"
+                className="w-full px-4 py-3 rounded-lg bg-transparent border border-black/10 dark:border-white/10 text-xs font-mono text-black dark:text-white placeholder:text-gray-400 outline-none focus:border-[#E63946] transition-colors"
+              />
+            </div>
+
+            {/* Message Input */}
+            <div className="space-y-1">
+              <label htmlFor="message" className="text-xs font-mono font-bold text-black dark:text-white">
+                MESSAGE *
+              </label>
+              <textarea
+                id="message"
+                value={message}
+                onChange={(e) => {
+                  setMessage(e.target.value);
+                  if (status === 'error') setStatus('');
+                }}
+                rows="4"
+                placeholder="Project details or message content..."
+                className="w-full px-4 py-3 rounded-lg bg-transparent border border-black/10 dark:border-white/10 text-xs font-mono text-black dark:text-white placeholder:text-gray-400 outline-none focus:border-[#E63946] transition-colors resize-none"
+              />
+            </div>
+
+            {/* Submit Button */}
+            <button
+              type="submit"
+              disabled={loading}
+              className="btn-crimson w-full py-3.5 text-xs font-mono font-bold disabled:opacity-50"
+            >
+              {loading ? 'SENDING...' : (
+                <>
+                  <FaPaperPlane className="w-3.5 h-3.5" /> SEND MESSAGE
+                </>
               )}
-
-              <div className="space-y-2">
-                <label htmlFor="name" className="text-sm font-bold text-gray-900 dark:text-gray-300">Full Name</label>
-                <input
-                  type="text"
-                  id="name"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                  required
-                  placeholder="Enter your name"
-                  className="w-full bg-primary/5 border border-primary/10 rounded-xl px-6 py-4 text-charcoal dark:text-offwhite placeholder:text-muted-gray/70 caret-primary outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all duration-300"
-                />
-              </div>
-
-              <div className="space-y-2">
-                <label htmlFor="email" className="text-sm font-bold text-gray-900 dark:text-gray-300">Email Address</label>
-                <input
-                  type="email"
-                  id="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  required
-                  placeholder="Enter your email"
-                  className="w-full bg-primary/5 border border-primary/10 rounded-xl px-6 py-4 text-charcoal dark:text-offwhite placeholder:text-muted-gray/70 caret-primary outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all duration-300"
-                />
-              </div>
-
-              <div className="space-y-2">
-                <label htmlFor="message" className="text-sm font-bold text-gray-900 dark:text-gray-300">Message</label>
-                <textarea
-                  id="message"
-                  value={message}
-                  onChange={(e) => setMessage(e.target.value)}
-                  required
-                  rows="5"
-                  placeholder="Tell me about your project"
-                  className="w-full bg-white dark:bg-white border border-primary/10 rounded-xl px-6 py-4 text-gray-900 placeholder-gray-500 caret-gray-900 outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all duration-300 resize-none"
-                />
-              </div>
-
-              <button
-                type="submit"
-                disabled={loading}
-                className="btn-primary w-full py-4 text-lg disabled:opacity-60 disabled:cursor-not-allowed"
-              >
-                {loading ? 'Sending...' : 'Send Message'}
-              </button>
-            </form>
-          </motion.div>
+            </button>
+          </form>
         </div>
       </div>
     </section>

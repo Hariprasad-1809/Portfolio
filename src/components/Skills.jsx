@@ -1,52 +1,76 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { motion } from 'framer-motion';
 import { skillsData } from '../data/skills';
 
 /**
- * Minimal Skills section with categorized cards and icons.
+ * Skills section with p-5 md:p-7 card padding, mb-8 md:mb-10 heading gap, and interactive category hover focus.
  */
 const Skills = () => {
+  const [hoveredIdx, setHoveredIdx] = useState(null);
+
   return (
-    <section id="skills" className="section-padding bg-white dark:bg-neutral-950 text-gray-900 dark:text-white">
-      <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-14">
-          <h2 className="text-[2rem] md:text-[3rem] font-semibold text-black dark:text-white">
-            Technical Skills
-          </h2>
-          <p className="mt-3 text-sm md:text-base text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-            A simple view of the tools, languages, and strengths I use most.
-          </p>
-        </div>
+    <section id="skills" className="section-padding">
+      {/* Header with mb-8 md:mb-10 */}
+      <div className="mb-8 md:mb-10 border-b border-black/10 dark:border-white/10 pb-4">
+        <h2 className="text-3xl sm:text-4xl font-mono font-bold text-black dark:text-white uppercase tracking-tight">
+          / Technical_Skills
+        </h2>
+        <p className="mt-2 text-sm text-gray-600 dark:text-gray-400 font-mono">
+          Languages, frameworks, databases, and deployment environments.
+        </p>
+      </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {skillsData.map((category) => {
-            const IconComponent = category.icon;
+      {/* Grid of Interactive Category Cards */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {skillsData.map((category, idx) => {
+          const CategoryIcon = category.icon;
+          const isHovered = hoveredIdx === idx;
+          const isDimmed = hoveredIdx !== null && !isHovered;
 
-            return (
-              <div
-                key={category.title}
-                className="rounded-xl border border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-black p-6"
-              >
-                <div className="mb-5 flex items-center gap-2 text-black dark:text-white">
-                  <IconComponent className="h-5 w-5 text-gray-900 dark:text-white" />
-                  <h3 className="text-lg font-semibold">{category.title}</h3>
+          return (
+            <motion.div
+              key={category.title}
+              onMouseEnter={() => setHoveredIdx(idx)}
+              onMouseLeave={() => setHoveredIdx(null)}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.3, delay: idx * 0.05 }}
+              whileHover={{ scale: 1.02 }}
+              className={`card-minimal p-5 md:p-7 flex flex-col justify-between transition-all duration-300 ${
+                isDimmed ? 'opacity-40 filter grayscale-[50%]' : 'opacity-100'
+              } ${isHovered ? 'border-[#E63946]' : ''}`}
+            >
+              <div>
+                {/* Header */}
+                <div className="flex items-center gap-3 mb-4">
+                  <CategoryIcon className={`w-5 h-5 ${isHovered ? 'text-[#E63946]' : 'text-black dark:text-white'}`} />
+                  <h3 className="text-lg font-mono font-bold text-black dark:text-white">
+                    {category.title}
+                  </h3>
                 </div>
 
-                <ul className="space-y-2">
+                <div className="w-full h-px bg-black/5 dark:bg-white/5 mb-4" />
+
+                {/* Skills List */}
+                <div className="grid grid-cols-2 gap-2">
                   {category.skills.map((skill) => {
                     const SkillIcon = skill.icon;
-
                     return (
-                    <li key={skill.name} className="flex items-center gap-3 text-sm text-gray-700 dark:text-gray-300">
-                      <SkillIcon className="h-4 w-4 shrink-0 text-gray-900 dark:text-white" />
-                      <span>{skill.name}</span>
-                    </li>
+                      <div
+                        key={skill.name}
+                        className="flex items-center gap-2 p-2 rounded border border-black/5 dark:border-white/5 text-xs font-mono text-gray-800 dark:text-gray-200"
+                      >
+                        <SkillIcon className="w-3.5 h-3.5 text-[#E63946] shrink-0" />
+                        <span className="truncate">{skill.name}</span>
+                      </div>
                     );
                   })}
-                </ul>
+                </div>
               </div>
-            );
-          })}
-        </div>
+            </motion.div>
+          );
+        })}
       </div>
     </section>
   );

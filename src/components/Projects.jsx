@@ -1,243 +1,188 @@
-import React, { memo, useCallback, useEffect, useMemo, useState } from 'react';
-import { createPortal } from 'react-dom';
+import React, { useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
-import { FaGithub, FaExternalLinkAlt } from 'react-icons/fa';
+import { FaGithub, FaExternalLinkAlt, FaTimes, FaArrowRight, FaCheckCircle } from 'react-icons/fa';
 import { projects } from '../data/projects';
 
 /**
- * Projects grid with staggered animations and interactive cards.
+ * Projects Section with 3-column grid, mb-8 md:mb-10 heading gap, gap-6 lg:gap-8 grid gap, and right slide-over drawer.
  */
 const Projects = () => {
-  const [openId, setOpenId] = useState(null);
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  const selectedProject = useMemo(
-    () => projects.find((project) => project.id === openId) ?? null,
-    [openId]
-  );
-
-  const openProject = useCallback((projectId) => {
-    setOpenId(projectId);
-  }, []);
-
-  const closeProject = useCallback(() => {
-    setOpenId(null);
-  }, []);
+  const [selectedProject, setSelectedProject] = useState(null);
 
   return (
     <section id="projects" className="section-padding">
-      <div className="max-w-7xl mx-auto">
-        <div className="text-left mb-12">
-          <motion.h2 className="text-[2rem] md:text-[3rem] font-heading font-bold mb-2 text-black dark:text-white">Projects</motion.h2>
-          <div className="thin-divider" />
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
-          {projects.map((project, index) => (
-            <ProjectCard
-              key={project.id}
-              project={project}
-              index={index}
-              onOpen={openProject}
-            />
-          ))}
-        </div>
-
-        {mounted && createPortal(
-          <AnimatePresence>
-            {selectedProject && (
-              <ProjectModal
-                key={selectedProject.id}
-                project={selectedProject}
-                onClose={closeProject}
-              />
-            )}
-          </AnimatePresence>,
-          document.body
-        )}
-      </div>
-    </section>
-  );
-};
-
-const ProjectCard = memo(function ProjectCard({ project, index, onOpen }) {
-  const handleOpen = useCallback(() => {
-    onOpen(project.id);
-  }, [onOpen, project.id]);
-
-  return (
-    <motion.article
-      initial={{ opacity: 0, y: 18 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: '0px 0px -8% 0px' }}
-      transition={{ duration: 0.35, delay: index * 0.03 }}
-      whileHover={{ y: -4 }}
-      whileTap={{ scale: 0.99 }}
-      onClick={handleOpen}
-      className="card-min group cursor-pointer will-change-transform flex flex-col h-[490px] p-6 bg-white/40 dark:bg-charcoal border border-black/5 dark:border-white/10 rounded-2xl shadow-sm hover:shadow-md hover:border-black/15 dark:hover:border-white/20 transition-all duration-300"
-    >
-      {/* Title */}
-      <h3 className="text-xl font-bold mb-2.5 tracking-tight text-black dark:text-white h-7 overflow-hidden line-clamp-1">
-        {project.title}
-      </h3>
-      
-      {/* Description */}
-      <p className="text-xs text-gray-900 dark:text-gray-300 mb-4 h-[54px] overflow-hidden line-clamp-3 leading-relaxed">
-        {project.shortDescription}
-      </p>
-      
-      {/* Image */}
-      <div className="w-full h-[180px] overflow-hidden rounded mb-4 border border-black/5 dark:border-white/5 shadow-sm shrink-0">
-        <img
-          src={project.image}
-          alt={`${project.title} preview`}
-          loading="lazy"
-          decoding="async"
-          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
-        />
+      {/* Header with reduced bottom margin mb-8 md:mb-10 */}
+      <div className="mb-8 md:mb-10 border-b border-black/10 dark:border-white/10 pb-4">
+        <h2 className="text-3xl sm:text-4xl font-mono font-bold text-black dark:text-white uppercase tracking-tight">
+          / Projects
+        </h2>
+        <p className="mt-2 text-sm text-gray-600 dark:text-gray-400 font-mono">
+          Featured full-stack platforms, machine learning tools, and RAG search systems.
+        </p>
       </div>
 
-      {/* Tech Stack */}
-      <div className="h-[48px] overflow-hidden mb-4 shrink-0">
-        <div className="flex gap-1.5 flex-wrap">
-          {project.tech.slice(0, 6).map((tech) => (
-            <span key={tech} className="text-[10px] px-2 py-0.5 border rounded-full text-gray-900 dark:text-gray-300 bg-black/5 dark:bg-white/5 border-black/10 dark:border-white/10">
-              {tech}
-            </span>
-          ))}
-          {project.tech.length > 6 && (
-            <span className="text-[10px] px-2 py-0.5 border rounded-full text-[#E63946] border-[#E63946]/20 bg-[#E63946]/5 font-bold shrink-0">
-              +{project.tech.length - 6} More
-            </span>
-          )}
-        </div>
-      </div>
+      {/* 3-Column Desktop Grid with gap-6 lg:gap-8 */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+        {projects.map((project, index) => (
+          <motion.article
+            key={project.id}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.4, delay: index * 0.06 }}
+            whileHover={{ scale: 1.02 }}
+            onClick={() => setSelectedProject(project)}
+            className="card-minimal p-5 md:p-7 flex flex-col justify-between cursor-pointer hover:border-black/30 dark:hover:border-white/30 group"
+          >
+            <div>
+              {/* Card Title */}
+              <h3 className="text-xl font-mono font-bold text-black dark:text-white mb-2 group-hover:text-[#E63946] transition-colors line-clamp-1">
+                {project.title}
+              </h3>
 
-      {/* Spacer */}
-      <div className="flex-grow" />
+              {/* 2-line Description */}
+              <p className="text-xs text-gray-600 dark:text-gray-400 font-mono leading-relaxed mb-4 line-clamp-2">
+                {project.shortDescription}
+              </p>
 
-      {/* Buttons */}
-      <div className="flex items-center gap-3 mt-auto shrink-0">
-        <a
-          href={project.github}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="flex-1 text-center py-2 px-3 border border-black/15 dark:border-white/15 hover:border-black/30 dark:hover:border-white/30 rounded-full text-xs font-bold text-black dark:text-white hover:bg-black/5 dark:hover:bg-white/5 transition-all duration-200 flex items-center justify-center gap-1.5"
-          onClick={(event) => event.stopPropagation()}
-        >
-          <FaGithub className="text-sm" /> Code
-        </a>
-        <a
-          href={project.live}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="flex-1 text-center py-2 px-3 bg-[#E63946] text-white hover:bg-[#d62b38] hover:opacity-95 rounded-full text-xs font-bold transition-all duration-200 shadow-sm flex items-center justify-center gap-1.5"
-          onClick={(event) => event.stopPropagation()}
-        >
-          <FaExternalLinkAlt className="text-[10px]" /> Live
-        </a>
-      </div>
-    </motion.article>
-  );
-});
-
-const ProjectModal = memo(function ProjectModal({ project, onClose }) {
-  return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      transition={{ duration: 0.18 }}
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/35 backdrop-blur-sm"
-      onClick={onClose}
-    >
-      <motion.div
-        initial={{ opacity: 0, scale: 0.95, y: 15 }}
-        animate={{ opacity: 1, scale: 1, y: 0 }}
-        exit={{ opacity: 0, scale: 0.97, y: 8 }}
-        transition={{ duration: 0.22, ease: 'easeOut' }}
-        className="w-full max-w-5xl rounded-3xl bg-white dark:bg-charcoal border border-black/10 dark:border-white/10 shadow-[0_24px_80px_rgba(0,0,0,0.25)] dark:shadow-[0_24px_80px_rgba(0,0,0,0.55)] overflow-hidden will-change-transform relative"
-        onClick={(event) => event.stopPropagation()}
-      >
-        {/* Close Button */}
-        <button
-          type="button"
-          onClick={onClose}
-          className="absolute top-4 right-4 z-10 rounded-full p-2 bg-black/5 dark:bg-white/10 hover:bg-black/10 dark:hover:bg-white/15 text-gray-700 dark:text-gray-300 transition-colors shadow-sm"
-          aria-label="Close project details"
-        >
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M6 18L18 6M6 6l12 12" />
-          </svg>
-        </button>
-
-        <div className="p-6 sm:p-8 md:p-10 max-h-[90vh] overflow-y-auto">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10 items-stretch">
-            {/* Left Column: Image */}
-            <div className="w-full flex items-center">
-              <img
-                src={project.image}
-                alt={project.title}
-                loading="eager"
-                decoding="async"
-                className="w-full h-64 sm:h-80 md:h-[450px] object-cover rounded-2xl border border-black/5 dark:border-white/5 shadow-md"
-              />
+              {/* Tech Stack Chips (Max 4 Visible) */}
+              <div className="flex flex-wrap gap-1.5 mb-5">
+                {project.tech.slice(0, 4).map((tech) => (
+                  <span
+                    key={tech}
+                    className="text-[10px] font-mono px-2 py-0.5 rounded border border-black/10 dark:border-white/10 text-gray-800 dark:text-gray-200"
+                  >
+                    {tech}
+                  </span>
+                ))}
+                {project.tech.length > 4 && (
+                  <span className="text-[10px] font-mono px-2 py-0.5 rounded border border-[#E63946]/30 text-[#E63946] font-bold">
+                    +{project.tech.length - 4} More
+                  </span>
+                )}
+              </div>
             </div>
 
-            {/* Right Column: Detailed Contents */}
-            <div className="flex flex-col justify-between space-y-6">
-              <div className="space-y-4">
-                <div className="pr-8">
-                  <h3 className="text-2xl sm:text-3xl md:text-4xl font-heading font-bold tracking-tight text-black dark:text-white">
-                    {project.title}
-                  </h3>
+            {/* Single Action Button */}
+            <div className="pt-3 border-t border-black/5 dark:border-white/5 flex items-center justify-between">
+              <span className="text-xs font-mono font-bold text-black dark:text-white group-hover:text-[#E63946] flex items-center gap-1">
+                View Details <FaArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
+              </span>
+              <span className="text-[10px] font-mono text-gray-400">#0{project.id}</span>
+            </div>
+          </motion.article>
+        ))}
+      </div>
+
+      {/* Slide-Over Drawer from Right */}
+      <AnimatePresence>
+        {selectedProject && (
+          <>
+            {/* Drawer Overlay Backdrop */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              className="fixed inset-0 z-50 bg-black/50 backdrop-blur-xs"
+              onClick={() => setSelectedProject(null)}
+            />
+
+            {/* Slide-Over Right Panel */}
+            <motion.aside
+              initial={{ x: '100%' }}
+              animate={{ x: 0 }}
+              exit={{ x: '100%' }}
+              transition={{ type: 'spring', damping: 28, stiffness: 300 }}
+              className="fixed inset-y-0 right-0 z-50 w-full max-w-xl bg-white dark:bg-[#121212] border-l border-black/10 dark:border-white/10 p-6 sm:p-8 overflow-y-auto flex flex-col justify-between shadow-2xl"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className="space-y-6">
+                {/* Drawer Header with Close Icon */}
+                <div className="flex items-center justify-between border-b border-black/10 dark:border-white/10 pb-4">
+                  <span className="text-xs font-mono font-bold text-[#E63946]">
+                    PROJECT_SPECIFICATION // #0{selectedProject.id}
+                  </span>
+                  <button
+                    onClick={() => setSelectedProject(null)}
+                    className="p-2 rounded-lg text-gray-600 dark:text-gray-400 hover:text-black dark:hover:text-white border border-black/10 dark:border-white/10 transition-colors"
+                    aria-label="Close Drawer"
+                  >
+                    <FaTimes className="w-4 h-4" />
+                  </button>
                 </div>
-                
-                <p className="text-sm sm:text-base text-gray-900 dark:text-gray-300 leading-relaxed whitespace-pre-line">
-                  {project.description}
+
+                {/* Project Image Preview */}
+                <div className="w-full h-56 sm:h-64 rounded-xl overflow-hidden border border-black/10 dark:border-white/10">
+                  <img
+                    src={selectedProject.image}
+                    alt={selectedProject.title}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+
+                {/* Title */}
+                <h3 className="text-2xl sm:text-3xl font-mono font-bold text-black dark:text-white">
+                  {selectedProject.title}
+                </h3>
+
+                {/* Full Description */}
+                <p className="text-xs sm:text-sm text-gray-700 dark:text-gray-300 font-mono leading-relaxed whitespace-pre-line">
+                  {selectedProject.description}
                 </p>
-                
+
+                {/* Tech Stack List */}
                 <div className="pt-2">
-                  <h4 className="text-xs font-bold uppercase tracking-wider mb-2 text-black dark:text-white">Tech Stack</h4>
+                  <h4 className="text-xs font-mono font-bold uppercase tracking-wider mb-3 text-gray-500">
+                    Tech Stack & Dependencies
+                  </h4>
                   <div className="flex flex-wrap gap-2">
-                    {project.tech.map((tech) => (
-                      <span key={tech} className="text-xs px-2.5 py-1 border rounded-full text-gray-900 dark:text-gray-300 bg-black/5 dark:bg-white/5 border-black/10 dark:border-white/10">
-                        {tech}
+                    {selectedProject.tech.map((tech) => (
+                      <span
+                        key={tech}
+                        className="text-xs font-mono px-3 py-1 rounded border border-black/10 dark:border-white/10 text-gray-900 dark:text-gray-100 flex items-center gap-1.5"
+                      >
+                        <FaCheckCircle className="w-3 h-3 text-[#E63946]" /> {tech}
                       </span>
                     ))}
                   </div>
                 </div>
               </div>
 
-              {/* Action Buttons */}
-              <div className="flex flex-col sm:flex-row items-center gap-3 pt-4">
+              {/* Drawer Bottom Actions: Code & Live Demo */}
+              <div className="pt-6 border-t border-black/10 dark:border-white/10 flex items-center gap-3 mt-8">
                 <a
-                  href={project.github}
+                  href={selectedProject.github}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-full sm:w-1/2 text-center py-3 px-6 border-2 border-black/15 dark:border-white/15 hover:border-black/30 dark:hover:border-white/30 rounded-full text-sm font-bold text-black dark:text-white hover:bg-black/5 dark:hover:bg-white/5 transition-all duration-200 flex items-center justify-center gap-2"
+                  className="flex-1 btn-outline text-xs py-3"
                 >
-                  <FaGithub className="text-lg" /> View Code
+                  <FaGithub className="w-4 h-4" /> CODE
                 </a>
-                <a
-                  href={project.live}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-full sm:w-1/2 text-center py-3 px-6 bg-[#E63946] text-white hover:bg-[#d62b38] hover:opacity-95 rounded-full text-sm font-bold transition-all duration-200 shadow-md hover:shadow-lg flex items-center justify-center gap-2"
-                >
-                  <FaExternalLinkAlt className="text-xs" /> Live Demo
-                </a>
+
+                {selectedProject.live ? (
+                  <a
+                    href={selectedProject.live}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex-1 btn-crimson text-xs py-3"
+                  >
+                    <FaExternalLinkAlt className="w-3 h-3" /> LIVE DEMO
+                  </a>
+                ) : (
+                  <span
+                    className="flex-1 border border-[#E63946]/30 text-[#E63946] font-mono font-bold text-xs py-3 rounded-lg text-center cursor-not-allowed select-none bg-[#E63946]/5"
+                  >
+                    Deployment in Progress
+                  </span>
+                )}
               </div>
-            </div>
-          </div>
-        </div>
-      </motion.div>
-    </motion.div>
+            </motion.aside>
+          </>
+        )}
+      </AnimatePresence>
+    </section>
   );
-});
+};
 
 export default Projects;
