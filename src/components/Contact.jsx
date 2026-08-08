@@ -48,20 +48,33 @@ const Contact = () => {
       return;
     }
 
+    const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+    const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+    const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
+
+    if (!serviceId || !templateId || !publicKey) {
+      console.warn("EmailJS environment variables are missing (VITE_EMAILJS_SERVICE_ID, VITE_EMAILJS_TEMPLATE_ID, VITE_EMAILJS_PUBLIC_KEY).");
+      setErrorMsg("Email service is currently unconfigured. Please send an email directly to hariprasadh1809@gmail.com.");
+      setStatus('error');
+      triggerShake();
+      return;
+    }
+
     setLoading(true);
     setStatus('');
     setErrorMsg('');
 
     try {
       await emailjs.send(
-        import.meta.env.VITE_EMAILJS_SERVICE_ID,
-        import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
+        serviceId,
+        templateId,
         {
           from_name: name,
           from_email: email,
           message: message,
+          to_name: 'Hariprasad H',
         },
-        import.meta.env.VITE_EMAILJS_PUBLIC_KEY
+        publicKey
       );
 
       setStatus('success');
@@ -70,7 +83,7 @@ const Contact = () => {
       setMessage('');
     } catch (err) {
       console.error("EmailJS Error:", err);
-      setErrorMsg("Failed to dispatch message. Please try again or email directly.");
+      setErrorMsg("Failed to dispatch message. Please verify your EmailJS keys or email directly.");
       setStatus('error');
       triggerShake();
     } finally {
