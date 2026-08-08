@@ -63,8 +63,13 @@ const Hero = () => {
           variants={itemVariants}
           className="text-gray-600 dark:text-gray-400 font-mono text-sm md:text-base leading-relaxed text-center"
         >
-          Computer Science Engineering student specializing in Cyber Security with strong skills in Python, SQL, and full-stack web development. Experienced in building scalable applications using React, FastAPI, and MySQL, developing REST APIs, implementing authentication systems, and deploying web applications. Completed a Frontend Development internship focused on responsive UI development and modern web technologies. Passionate about software engineering, algorithms, and problem solving, seeking a Software Development Internship to build impactful and scalable software solutions.
-        </motion.p>
+        Computer Science Engineering student with strong skills in Python, Java, SQL, and full-stack web development. Experienced in
+        building scalable applications using React, FastAPI, and PostgreSQL, developing REST APIs and implementing authentication
+        systems. Hands-on experience in Generative AI, Retrieval-Augmented Generation (RAG), LangChain, vector databases,
+        and semantic search for AI-powered applications. Experienced in developing and deploying full-stack and AI-driven solutions with
+        responsive user interfaces and cloud technologies. Strong foundation in Data Structures and Algorithms, Object-Oriented
+        Programming, and problem solving, seeking a Software Development / AI Engineering Internship to build impactful and
+        scalable solutions        </motion.p>
 
         {/* Centered CTA Buttons */}
         <motion.div
