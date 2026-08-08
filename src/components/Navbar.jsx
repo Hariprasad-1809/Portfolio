@@ -23,13 +23,18 @@ const Navbar = () => {
     <header className="fixed top-0 left-0 right-0 z-50 bg-white dark:bg-[#121212] border-b border-black/10 dark:border-white/10">
       <div className="max-w-7xl mx-auto px-5 sm:px-8 py-4 flex items-center justify-between">
         
-        {/* Brand Logo / Monospace Name */}
+        {/* Brand Logo */}
         <Link
           to="/"
-          className="font-mono font-bold text-lg text-black dark:text-white tracking-tight hover:text-[#E63946] dark:hover:text-[#E63946] transition-colors"
+          className="flex items-center gap-2.5 font-mono font-bold text-lg text-black dark:text-white tracking-tight hover:text-[#E63946] dark:hover:text-[#E63946] transition-colors group"
           onClick={() => setOpen(false)}
         >
-          [HARIPRASAD_H]
+          <img
+            src="/apple-touch-icon.png"
+            alt="Hariprasad Logo"
+            className="w-8 h-8 rounded-lg object-contain shadow-sm border border-black/10 dark:border-white/10 group-hover:scale-105 transition-transform"
+          />
+          <span>[HARIPRASAD_H]</span>
         </Link>
 
         {/* Desktop Links */}
