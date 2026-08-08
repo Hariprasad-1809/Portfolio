@@ -27,26 +27,6 @@ export const projects = [
   },
   {
     id: 2,
-    title: "AI Resume Analyzer",
-    shortDescription: "AI-powered resume analyzer that compares resumes with job roles using semantic similarity and LLM-powered insights.",
-    description: "An intelligent resume analysis platform that allows users to upload PDF resumes and compare them against a desired job role. It performs semantic matching using embeddings, identifies missing skills and keywords, analyzes resume sections, and provides personalized recommendations to improve the resume for better job alignment.",
-    tech: [
-      "React",
-      "FastAPI",
-      "Python",
-      "LangChain",
-      "Google Gemini",
-      "FAISS",
-      "Sentence Transformers",
-      "PyMuPDF",
-      "Tailwind CSS"
-    ],
-    image: "/projects/ai_resume_analyzer.png",
-    github: "https://github.com/Hariprasad-1809/resume_Analyzer",
-    live: "https://resume-analyzer-swart-two.vercel.app"
-  },
-  {
-    id: 3,
     title: "GitSense AI",
     shortDescription: "AI-powered GitHub repository assistant for understanding large codebases using Retrieval-Augmented Generation.",
     description: "GitSense AI helps developers understand unfamiliar GitHub repositories by cloning the repository, indexing source code, generating embeddings, and answering code-related questions using Retrieval-Augmented Generation (RAG). It enables semantic code search, repository exploration, and context-aware explanations powered by Google Gemini.",
@@ -64,7 +44,27 @@ export const projects = [
     ],
     image: "/projects/gitsense_ai.png",
     github: "https://github.com/Hariprasad-1809/GitSenseAi",
-    live: null
+    live: "https://git-sense-ai.vercel.app"
+  },
+  {
+    id: 3,
+    title: "AI Resume Analyzer",
+    shortDescription: "AI-powered resume analyzer that compares resumes with job roles using semantic similarity and LLM-powered insights.",
+    description: "An intelligent resume analysis platform that allows users to upload PDF resumes and compare them against a desired job role. It performs semantic matching using embeddings, identifies missing skills and keywords, analyzes resume sections, and provides personalized recommendations to improve the resume for better job alignment.",
+    tech: [
+      "React",
+      "FastAPI",
+      "Python",
+      "LangChain",
+      "Google Gemini",
+      "FAISS",
+      "Sentence Transformers",
+      "PyMuPDF",
+      "Tailwind CSS"
+    ],
+    image: "/projects/ai_resume_analyzer.png",
+    github: "https://github.com/Hariprasad-1809/resume_Analyzer",
+    live: "https://resume-analyzer-swart-two.vercel.app"
   },
   {
     id: 4,
